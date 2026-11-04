@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>{% block titulo %}Mi Aplicación Web{% endblock
+%}</title>
+</head>
+<body>
+    <!-- Encabezado Común -->
+    <header>
+    <h1>Sistema de Gestión</h1>
+        <nav>
+            <a href="/">Inicio</a> |
+            <a href="/productos/">Productos</a> |
+            <a href="/contacto/">Contacto</a>
+        </nav>
+    </header>
+    <hr>
+    <!-- Área donde cada página pondrá su contenido -->
+    <main>
+        {% block contenido %}
+        <!-- El contenido específico irá aquí -->
+        {% endblock %}
+    </main>
+    <hr>
+    <!-- Pie de página Común -->
+    <footer>
+        <p>© 2026 - Programación Web | Todos los derechos
+    reservados</p>
+    </footer>
+</body>
+</html>

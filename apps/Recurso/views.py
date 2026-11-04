@@ -1,3 +1,30 @@
-from django.shortcuts import render
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Recurso
 
-# Create your views here.
+class RecursoDetailView(DetailView):
+    model = Recurso
+    template_name = "recurso/detalle.html"
+    context_object_name = "recurso"
+
+class RecursoListView(ListView):
+    model = Recurso
+    template_name = 'recurso/list.html'
+    context_object_name = 'recursos'
+
+class RecursoCreateView(CreateView):
+    model = Recurso
+    fields = '__all__'
+    template_name = 'recurso/create.html'
+    success_url = reverse_lazy('recursos:recurso_list')
+
+class RecursoUpdateView(UpdateView):
+    model = Recurso
+    fields = '__all__'
+    template_name = 'recurso/update.html'
+    success_url = reverse_lazy('recursos:recurso_list')
+
+class RecursoDeleteView(DeleteView):
+    model = Recurso
+    template_name = 'recurso/delete.html'
+    success_url = reverse_lazy('recursos:recurso_list')
