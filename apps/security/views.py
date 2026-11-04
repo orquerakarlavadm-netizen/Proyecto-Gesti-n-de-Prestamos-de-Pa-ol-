@@ -1,10 +1,7 @@
-from django.contrib.auth.views import LoginView as DjangoLoginView, LogoutView as DjangoLogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 
+class UserLoginView(LoginView):
+    template_name = "registration/login.html"
 
-class LoginView(DjangoLoginView):
-    template_name = 'registration/login.html'
-    redirect_authenticated_user = True
-
-
-class LogoutView(DjangoLogoutView):
-    next_page = '/inicio/'
+class UserLogoutView(LogoutView):
+    pass

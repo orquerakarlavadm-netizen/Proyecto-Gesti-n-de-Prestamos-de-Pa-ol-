@@ -1,0 +1,211 @@
+:root {
+    --azul-celeste: #0096D6;
+    --naranja-marte: #F57C00;
+    --fondo-sitio: #F9FAFC;
+    --texto-oscuro: #1A1A1A;
+    --border-color: #E2E8F0;
+    --blanco: #FFFFFF;
+    --gris-texto: #4A5568;
+    --gris-suave: #718096;
+}
+
+body {
+    background-color: var(--fondo-sitio);
+    color: var(--texto-oscuro);
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Encabezado Institucional */
+.header-institucional {
+    background-color: var(--blanco);
+    border-bottom: 4px solid var(--azul-celeste);
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.header-branding {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-marte {
+    height: 55px;
+    width: auto;
+}
+
+.titulo-colegio {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--azul-celeste);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.subtitulo-colegio {
+    font-size: 0.9rem;
+    color: var(--naranja-marte);
+    font-weight: 600;
+}
+
+/* Navegación */
+.nav-principal {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.nav-principal a {
+    color: #2D3748;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.nav-principal a:hover {
+    color: var(--azul-celeste);
+}
+
+.user-badge {
+    background-color: #EBF8FF;
+    color: var(--azul-celeste);
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid var(--azul-celeste);
+}
+
+.form-logout {
+    margin: 0;
+    display: inline;
+}
+
+.btn-logout {
+    background-color: var(--naranja-marte);
+    color: var(--blanco);
+    border: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-login {
+    background-color: var(--azul-celeste);
+    color: var(--blanco);
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Contenedor Principal */
+.contenedor-principal {
+    max-width: 1140px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    min-height: 75vh;
+}
+
+/* Secciones de Inicio */
+.inicio-card {
+    background-color: var(--blanco);
+    border: 1px solid var(--border-color);
+    border-top: 5px solid var(--naranja-marte);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.inicio-titulo {
+    color: var(--azul-celeste);
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.inicio-descripcion {
+    color: var(--gris-texto);
+    max-width: 750px;
+    margin: 1rem auto;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.inicio-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    background-color: var(--azul-celeste);
+    color: var(--blanco);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 150, 214, 0.3);
+}
+
+.btn-accent {
+    background-color: var(--naranja-marte);
+    color: var(--blanco);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(245, 124, 0, 0.3);
+}
+
+/* Form Cards y Formularios */
+.form-card {
+    background: var(--blanco);
+    border: 1px solid var(--border-color);
+    border-top: 4px solid var(--azul-celeste);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.form-card h2 {
+    color: var(--azul-celeste);
+    margin-top: 0;
+}
+
+.acciones-form {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    background-color: #EDF2F7;
+    color: #4A5568;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Pie de Página */
+.footer-institucional {
+    background-color: var(--blanco);
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    padding: 1.2rem;
+    color: var(--gris-suave);
+    font-size: 0.85rem;
+}
+
+.subfooter {
+    margin: 0.3rem 0 0 0;
+    color: var(--azul-celeste);
+}

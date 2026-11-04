@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Registro{% endblock %}
+{% block contenido %}
+<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid #0096D6; border-radius: 8px; padding: 2rem; max-width: 600px; margin: 0 auto;">
+    <h2 style="color: #0096D6; margin-top: 0;">Ficha Informativa</h2>
+    <p><strong>Registro:</strong> {{ object }}</p>
+    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+        <a href="editar/" style="background-color: #F57C00; color: #FFFFFF; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: 600;">Editar</a>
+        <a href="{% url 'docente:docente_list' %}" style="background-color: #EDF2F7; color: #4A5568; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: 600;">Volver al Listado</a>
+    </div>
+</div>
+{% endblock %}

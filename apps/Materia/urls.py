@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import MateriaCreateView, MateriaDeleteView, MateriaDetailView, MateriaListView, MateriaUpdateView
+from .views import (MateriaListView, MateriaDetailView, MateriaCreateView, MateriaUpdateView, MateriaDeleteView)
 
-app_name = 'materias'
+app_name = "materia"
 
 urlpatterns = [
-    path('materias/', MateriaListView.as_view(), name='materia_list'),
-    path('materias/<int:pk>/', MateriaDetailView.as_view(), name='materia_detail'),
-    path('materias/nueva/', MateriaCreateView.as_view(), name='materia_create'),
-    path('materias/<int:pk>/editar/', MateriaUpdateView.as_view(), name='materia_update'),
-    path('materias/<int:pk>/eliminar/', MateriaDeleteView.as_view(), name='materia_delete'),
+    path("", MateriaListView.as_view(), name="materia_list"),
+    path("nuevo/", MateriaCreateView.as_view(), name="materia_create"),
+    path("<int:pk>/", MateriaDetailView.as_view(), name="materia_detail"),
+    path("<int:pk>/editar/", MateriaUpdateView.as_view(), name="materia_update"),
+    path("<int:pk>/eliminar/", MateriaDeleteView.as_view(), name="materia_delete"),
 ]

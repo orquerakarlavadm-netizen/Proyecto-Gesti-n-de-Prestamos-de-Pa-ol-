@@ -1,6 +1,6 @@
 from django.db import models
-from apps.Curso.models import Curso
-from apps.Docente.models import Docente
+from apps.curso.models import Curso
+from apps.docente.models import Docente
 
 class Materia(models.Model):
     nombre = models.CharField(max_length=100)

@@ -1,8 +1,18 @@
 {% extends "base/base.html" %}
-
-{% block titulo %}Inicio - Mi Aplicación Web{% endblock %}
-
+{% block titulo %}Inicio — Pañol CTPAMM{% endblock %}
 {% block contenido %}
-    <h2>Bienvenido a la Página Principal</h2>
-    <p>Este es el contenido exclusivo de la sección de inicio.</p>
+<section style="background-color: #FFFFFF; border: 1px solid #E2E8F0; border-top: 5px solid #F57C00; border-radius: 8px; padd
+ing: 2.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.03);">
+    <h2 style="color: #0096D6; margin-top: 0; font-size: 2rem;">Gestión de Préstamos y Recursos del Pañol</h2>
+    <p style="color: #4A5568; max-width: 750px; margin: 1rem auto; font-size: 1.05rem; line-height: 1.6;">
+        Bienvenido al sistema institucional del <strong>Colegio Técnico Provincial "Antonio Martín Marte"</strong>. Desde aquí los docentes pueden consultar la disponibilidad de netbooks, proyectores, insumos y laboratorios, así como gestionar solicitudes de reserva para sus clases.
+    </p>
+    
+    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
+        <a href="{% url 'recurso:recurso_list' %}" style="background-color: #0096D6; color: #FFFFFF; padding: 0.75rem 1.5rem;
+    border-radius: 6px; text-decoration: none; font-weight: 600; box-shadow: 0 2px 4px rgba(0,150,214,0.3);">■ Consultar Recursos</a>
+<a href="{% url 'reserva:reserva_create' %}" style="background-color: #F57C00; color: #FFFFFF; padding: 0.75rem 1.5re
+m; border-radius: 6px; text-decoration: none; font-weight: 600; box-shadow: 0 2px 4px rgba(245,124,0,0.3);">■ Solicitar Reserva</a>
+    </div>
+</section>
 {% endblock %}

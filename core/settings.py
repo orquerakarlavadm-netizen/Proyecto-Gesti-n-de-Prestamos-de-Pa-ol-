@@ -37,12 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.Curso',
-    'apps.Docente',
-    'apps.Materia',
-    'apps.Recurso',
-    'apps.Reserva',
-    'apps.Inicio',
+    'apps.curso',
+    'apps.docente',
+    'apps.materia',
+    'apps.recurso',
+    'apps.reserva',
+    'apps.inicio',
     'apps.security',
 ]
 
