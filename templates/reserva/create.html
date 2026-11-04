@@ -1,14 +1,27 @@
-{% extends "base/base.html" %}
-{% block titulo %}Formulario de Registro{% endblock %}
+{% extends 'base/base.html' %}
+
+{% block titulo %}Nueva Reserva / Préstamo — CTP A. M. Marte{% endblock %}
+
+
 {% block contenido %}
-<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid #0096D6; border-radius: 8px; padding: 2rem;max-width: 550px; margin: 0 auto;">
-    <h2 style="color: #0096D6; margin-top: 0;">{% if object %}Editar{% else %}Nuevo{% endif %} Registro</h2>
-    <form method="post">
+<div class="form-container">
+    <div class="form-header">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h2 class="form-header-title">Nueva Reserva / Préstamo</h2>
+    </div>
+
+    <form method="post" class="form-body">
         {% csrf_token %}
+        
         {{ form.as_p }}
-        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-            <button type="submit" style="background-color: #F57C00; color: #FFFFFF; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; cursor: pointer;">Guardar</button>
-            <a href="{% url 'reserva:reserva_list' %}" style="background-color: #EDF2F7; color: #4A5568; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-weight: 600;">Cancelar</a>
+
+        <div class="form-actions">
+            <a href="{% url 'reserva:reserva_list' %}" class="btn-cancel">
+                <i class="fa-solid fa-xmark"></i> Cancelar
+            </a>
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-floppy-disk"></i> Registar Reserva
+            </button>
         </div>
     </form>
 </div>

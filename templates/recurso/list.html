@@ -1,35 +1,92 @@
-{% extends "base/base.html" %}
-{% block titulo %}Listado de Elementos{% endblock %}
+{% extends 'base/base.html' %}
+
+{% block titulo %}Listado de Recursos — CTP A. M. Marte{% endblock %}
+
+
 {% block contenido %}
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-    <h2 style="color: #0096D6; margin: 0;">Gestión de Datos</h2>
-    <a href="{% url 'recurso:recurso_create' %}" style="background-color: #F57C00; color: #FFFFFF; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-weight: 600;">+ Nuevo Registro</a>
+<!-- Encabezado de la Sección -->
+<div class="page-header">
+    <div class="page-title-group">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <div>
+            <h1 class="page-title">Gestión de Recursos</h1>
+            <p class="page-subtitle">Inventario de equipos, herramientas y materiales del pañol</p>
+        </div>
+    </div>
+    <a href="{% url 'recurso:recurso_create' %}" class="btn-create">
+        <i class="fa-solid fa-plus"></i> Nuevo Recurso
+    </a>
 </div>
 
-<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
-        <thead style="background-color: #0096D6; color: #FFFFFF;">
-            <tr>
-                <th style="padding: 0.8rem 1rem;">Descripción</th>
-                <th style="padding: 0.8rem 1rem;">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list %}
-            <tr style="border-bottom: 1px solid #E2E8F0;">
-                <td style="padding: 0.8rem 1rem; font-weight: 600; color: #2D3748;">{{ object }}</td>
-                <td style="padding: 0.8rem 1rem;">
-                    <a href="{% url 'recurso:recurso_detail' object.pk %}" style="color: #0096D6; text-decoration: none; font-weight: 600; margin-right: 0.5rem;">Ver</a>
-                    <a href="{% url 'recurso:recurso_detail' object.pk %}editar/" style="color: #D69E2E; text-decoration: none; font-weight: 600; margin-right: 0.5rem;">Editar</a>
-                    <a href="{% url 'recurso:recurso_detail' object.pk %}eliminar/" style="color: #E53E3E; text-decoration: none; font-weight: 600;">Eliminar</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="2" style="padding: 1rem; text-align: center; color: #718096;">No hay registros disponibles.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<!-- Tabla de Registros -->
+<div class="table-card">
+    <div class="table-container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Recurso</th>
+                    {% if object_list.0.codigo %}<th>Código</th>{% endif %}
+                    {% if object_list.0.categoria %}<th>Categoría</th>{% endif %}
+                    {% if object_list.0.cantidad is not None %}<th>Cantidad</th>{% endif %}
+                    {% if object_list.0.estado %}<th>Estado</th>{% endif %}
+                    <th class="table-actions-heading">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recurso in object_list %}
+                <tr>
+                    <td class="table-index">{{ forloop.counter }}</td>
+                    <td class="table-name">
+                        {{ recurso }}
+                    </td>
+                    {% if object_list.0.codigo %}
+                        <td>{{ recurso.codigo }}</td>
+                    {% endif %}
+                    {% if object_list.0.categoria %}
+                        <td>{{ recurso.categoria }}</td>
+                    {% endif %}
+                    {% if object_list.0.cantidad is not None %}
+                        <td><span class="table-quantity">{{ recurso.cantidad }}</span></td>
+                    {% endif %}
+                    {% if object_list.0.estado %}
+                        <td>{{ recurso.estado }}</td>
+                    {% endif %}
+                    <td>
+                        <div class="action-buttons">
+                            {% if recurso.pk %}
+                                <a href="{% url 'recurso:recurso_detail' recurso.pk %}" class="btn-action btn-action-view" title="Ver Detalle">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="{% url 'recurso:recurso_update' recurso.pk %}" class="btn-action btn-action-edit" title="Editar">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="{% url 'recurso:recurso_delete' recurso.pk %}" class="btn-action btn-action-delete" title="Eliminar">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ recurso.id }}/" class="btn-action btn-action-view" title="Ver Detalle">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>No hay recursos registrados actualmente en el pañol.</p>
+                            <a href="{% url 'recurso:recurso_create' %}" class="btn-create">
+                                <i class="fa-solid fa-plus"></i> Registrar el primero
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

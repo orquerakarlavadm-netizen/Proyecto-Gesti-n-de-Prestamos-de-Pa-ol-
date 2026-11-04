@@ -1,35 +1,88 @@
-{% extends "base/base.html" %}
-{% block titulo %}Listado de Elementos{% endblock %}
+{% extends 'base/base.html' %}
+
+{% block titulo %}Listado de Docentes — CTP A. M. Marte{% endblock %}
+
+
 {% block contenido %}
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-    <h2 style="color: #0096D6; margin: 0;">Gestión de Datos</h2>
-    <a href="{% url 'docente:docente_create' %}" style="background-color: #F57C00; color: #FFFFFF; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-weight: 600;">+ Nuevo Registro</a>
+<!-- Encabezado de la Sección -->
+<div class="page-header">
+    <div class="page-title-group">
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <div>
+            <h1 class="page-title">Gestión de Docentes</h1>
+            <p class="page-subtitle">Listado del cuerpo docente registrado en el establecimiento</p>
+        </div>
+    </div>
+    <a href="{% url 'docente:docente_create' %}" class="btn-create">
+        <i class="fa-solid fa-plus"></i> Nuevo Docente
+    </a>
 </div>
 
-<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
-        <thead style="background-color: #0096D6; color: #FFFFFF;">
-            <tr>
-                <th style="padding: 0.8rem 1rem;">Descripción</th>
-                <th style="padding: 0.8rem 1rem;">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list %}
-                <tr style="border-bottom: 1px solid #E2E8F0;">
-                    <td style="padding: 0.8rem 1rem; font-weight: 600; color: #2D3748;">{{ object }}</td>
-                    <td style="padding: 0.8rem 1rem;">
-                        <a href="{% url 'docente:docente_detail' object.pk %}" style="color: #0096D6; text-decoration: none;font-weight: 600; margin-right: 0.5rem;">Ver</a>
-                        <a href="{% url 'docente:docente_detail' object.pk %}editar/" style="color: #D69E2E; text-decoration:none; font-weight: 600; margin-right: 0.5rem;">Editar</a>
-                        <a href="{% url 'docente:docente_detail' object.pk %}eliminar/" style="color: #E53E3E; text-decoration: none; font-weight: 600;">Eliminar</a>
+<!-- Tabla de Registros -->
+<div class="table-card">
+    <div class="table-container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Docente</th>
+                    {% if object_list.0.dni %}<th>DNI</th>{% endif %}
+                    {% if object_list.0.email %}<th>Email</th>{% endif %}
+                    {% if object_list.0.telefono %}<th>Teléfono</th>{% endif %}
+                    <th class="table-actions-heading">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for docente in object_list %}
+                <tr>
+                    <td class="table-index">{{ forloop.counter }}</td>
+                    <td class="table-name">
+                        {{ docente }}
+                    </td>
+                    {% if object_list.0.dni %}
+                        <td>{{ docente.dni }}</td>
+                    {% endif %}
+                    {% if object_list.0.email %}
+                        <td>{{ docente.email }}</td>
+                    {% endif %}
+                    {% if object_list.0.telefono %}
+                        <td>{{ docente.telefono }}</td>
+                    {% endif %}
+                    <td>
+                        <div class="action-buttons">
+                            {% if docente.pk %}
+                                <a href="{% url 'docente:docente_detail' docente.pk %}" class="btn-action btn-action-view" title="Ver Detalle">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="{% url 'docente:docente_update' docente.pk %}" class="btn-action btn-action-edit" title="Editar">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="{% url 'docente:docente_delete' docente.pk %}" class="btn-action btn-action-delete" title="Eliminar">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ docente.id }}/" class="btn-action btn-action-view" title="Ver Detalle">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            {% endif %}
+                        </div>
                     </td>
                 </tr>
-            {% empty %}
+                {% empty %}
                 <tr>
-                    <td colspan="2" style="padding: 1rem; text-align: center; color: #718096;">No hay registros disponibles.</td>
+                    <td colspan="6">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>No hay docentes registrados actualmente.</p>
+                            <a href="{% url 'docente:docente_create' %}" class="btn-create">
+                                <i class="fa-solid fa-plus"></i> Registrar el primero
+                            </a>
+                        </div>
+                    </td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

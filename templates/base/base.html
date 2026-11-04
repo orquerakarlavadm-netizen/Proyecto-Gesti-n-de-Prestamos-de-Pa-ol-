@@ -4,55 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %}Pañol — CTP "Antonio Martín Marte"{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-    {% block css %}{% endblock %}
+    <title>{% block titulo %}Gestión Escolar — CTP Antonio Martín Marte{% endblock %}</title>
+    
+    <!-- Tipografía y Iconos Modernos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
 
-    <!-- Encabezado Institucional -->
-    <header class="header-institucional">
-        <div class="header-branding">
-            <img src="{% static 'logo-marte.png' %}" alt="Logo CTP Antonio Martín Marte" class="logo-marte">
-            <div
-                <h1 class="titulo-colegio">Colegio Técnico Provincial</h1>
-                <span class="subtitulo-colegio">"Antonio Martín Marte" — Ushuaia</span>
-            </div>
+    <!-- Menú Lateral -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1>CTP "A. M. Marte"</h1>
+            <span>Sistema de Gestión Pañol</span>
         </div>
 
-        <!-- Navegación Principal -->
-        <nav class="nav-principal">
-            <a href="{% url 'inicio:inicio_home' %}">Inicio</a>
-            <a href="{% url 'curso:curso_list' %}">Cursos</a>
-            <a href="{% url 'materia:materia_list' %}">Materias</a>
-            <a href="{% url 'docente:docente_list' %}">Docentes</a>
-            <a href="{% url 'recurso:recurso_list' %}">Recursos</a>
-            <a href="{% url 'reserva:reserva_list' %}">Reservas</a>
-    
-            {% if user.is_authenticated %}
-                <span class="user-badge">■ {{ user.username }}</span>
-                <form method="post" action="{% url 'logout' %}" class="form-logout">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-logout">Cerrar Sesión</button>
-                </form>
-            {% else %}
-                <a href="{% url 'login' %}" class="btn-login">Iniciar Sesión</a>
-            {% endif %}
-        </nav>
-    </header>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="{% url 'inicio:inicio_home' %}" class="nav-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'recurso:recurso_list' %}" class="nav-link">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <span>Inventario</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'reserva:reserva_list' %}" class="nav-link">
+                    <i class="fa-solid fa-handshake"></i>
+                    <span>Préstamos / Reservas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'docente:docente_list' %}" class="nav-link">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>Docentes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'curso:curso_list' %}" class="nav-link">
+                    <i class="fa-solid fa-users-rectangle"></i>
+                    <span>Cursos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'materia:materia_list' %}" class="nav-link">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Materias</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
 
-    <!-- Contenido Dinámico -->
-    <main class="contenedor-principal">
-        {% block contenido %}{% endblock %}
-    </main>
+    <!-- Área Principal de Contenido -->
+    <div class="wrapper">
+        <!-- Topbar Institucional -->
+        <header class="topbar">
+            <div><!-- Espacio reservado para títulos dinámicos si se requiere --></div>
 
-    <!-- Pie de Página -->
-    <footer class="footer-institucional">
-        <p>&copy; 2026 — <strong>Colegio Técnico Provincial "Antonio Martín Marte"</strong> | Ushuaia, Tierra del Fuego</p>
-        <p class="subfooter">Sistema Institucional de Gestión de Préstamos del Pañol</p>
-    </footer>
+            <div class="user-panel">
+                {% if user.is_authenticated %}
+                    <div class="user-info">
+                        <div class="user-avatar">{{ user.username|slice:":1"|upper }}</div>
+                        <span>{{ user.username }}</span>
+                    </div>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login"><i class="fa-solid fa-user-lock"></i> Acceso Admin</a>
+                {% endif %}
+            </div>
+        </header>
 
-    <script src="{% static 'js/principal.js' %}"></script>
+        <!-- Contenido Dinámico -->
+        <main class="main-content">
+            {% block contenido %}{% endblock %}
+        </main>
+
+        <!-- Pie de Página Simplificado -->
+        <footer class="footer">
+            <p>© 2026 Colegio Técnico Provincial "Antonio Martín Marte" — Ushuaia, Tierra del Fuego</p>
+            <p>Control Interno de Pañol</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
     {% block js %}{% endblock %}
 </body>
 </html>

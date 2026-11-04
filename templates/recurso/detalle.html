@@ -1,12 +1,81 @@
-{% extends "base/base.html" %}
-{% block titulo %}Detalle de Registro{% endblock %}
+{% extends 'base/base.html' %}
+
+{% block titulo %}Ficha de Recurso: {{ object.nombre|default:object }} — CTP A. M. Marte{% endblock %}
+
+
 {% block contenido %}
-<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-top: 4px solid #0096D6; border-radius: 8px; padding: 2rem;max-width: 600px; margin: 0 auto;">
-    <h2 style="color: #0096D6; margin-top: 0;">Ficha Informativa</h2>
-    <p><strong>Registro:</strong> {{ object }}</p>
-    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-        <a href="editar/" style="background-color: #F57C00; color: #FFFFFF; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: 600;">Editar</a>
-        <a href="{% url 'recurso:recurso_list' %}" style="background-color: #EDF2F7; color: #4A5568; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: 600;">Volver al Listado</a>
+<div class="detail-container">
+    <div class="detail-header">
+        <div class="detail-title-group">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <h2 class="detail-title">Ficha de Recurso</h2>
+        </div>
+        <span class="detail-badge">Inventario Pañol</span>
+    </div>
+
+    <div class="detail-body">
+        <div class="detail-grid">
+            <div class="detail-item detail-item-full">
+                <span class="detail-label"><i class="fa-solid fa-box"></i> Nombre / Nombre del Recurso</span>
+                <span class="detail-value">{{ object }}</span>
+            </div>
+
+            {% if object.codigo %}
+            <div class="detail-item">
+                <span class="detail-label"><i class="fa-solid fa-barcode"></i> Código / Identificador</span>
+                <span class="detail-value">{{ object.codigo }}</span>
+            </div>
+            {% endif %}
+
+            {% if object.categoria %}
+            <div class="detail-item">
+                <span class="detail-label"><i class="fa-solid fa-layer-group"></i> Categoría</span>
+                <span class="detail-value">{{ object.categoria }}</span>
+            </div>
+            {% endif %}
+
+            {% if object.cantidad is not None %}
+            <div class="detail-item">
+                <span class="detail-label"><i class="fa-solid fa-cubes"></i> Cantidad Disponible</span>
+                <span class="detail-value">{{ object.cantidad }}</span>
+            </div>
+            {% endif %}
+
+            {% if object.estado %}
+            <div class="detail-item">
+                <span class="detail-label"><i class="fa-solid fa-circle-info"></i> Estado</span>
+                <span class="detail-value">{{ object.estado }}</span>
+            </div>
+            {% endif %}
+
+            {% if object.descripcion %}
+            <div class="detail-item detail-item-full">
+                <span class="detail-label"><i class="fa-solid fa-align-left"></i> Descripción / Notas</span>
+                <span class="detail-value detail-value-light">{{ object.descripcion }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="detail-actions">
+            <a href="{% url 'recurso:recurso_list' %}" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Volver al Listado
+            </a>
+
+            <div class="action-group-right">
+                {% if object.pk %}
+                <a href="{% url 'recurso:recurso_delete' object.pk %}" class="btn-delete">
+                    <i class="fa-solid fa-trash-can"></i> Eliminar
+                </a>
+                <a href="{% url 'recurso:recurso_update' object.pk %}" class="btn-edit">
+                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                </a>
+                {% else %}
+                <a href="editar/" class="btn-edit">
+                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

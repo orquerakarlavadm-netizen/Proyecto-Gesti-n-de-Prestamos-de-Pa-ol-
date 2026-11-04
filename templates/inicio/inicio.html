@@ -1,18 +1,113 @@
-{% extends "base/base.html" %}
-{% block titulo %}Inicio — Pañol CTPAMM{% endblock %}
-{% block contenido %}
-<section style="background-color: #FFFFFF; border: 1px solid #E2E8F0; border-top: 5px solid #F57C00; border-radius: 8px; padd
-ing: 2.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.03);">
-    <h2 style="color: #0096D6; margin-top: 0; font-size: 2rem;">Gestión de Préstamos y Recursos del Pañol</h2>
-    <p style="color: #4A5568; max-width: 750px; margin: 1rem auto; font-size: 1.05rem; line-height: 1.6;">
-        Bienvenido al sistema institucional del <strong>Colegio Técnico Provincial "Antonio Martín Marte"</strong>. Desde aquí los docentes pueden consultar la disponibilidad de netbooks, proyectores, insumos y laboratorios, así como gestionar solicitudes de reserva para sus clases.
-    </p>
-    
-    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
-        <a href="{% url 'recurso:recurso_list' %}" style="background-color: #0096D6; color: #FFFFFF; padding: 0.75rem 1.5rem;
-    border-radius: 6px; text-decoration: none; font-weight: 600; box-shadow: 0 2px 4px rgba(0,150,214,0.3);">■ Consultar Recursos</a>
-<a href="{% url 'reserva:reserva_create' %}" style="background-color: #F57C00; color: #FFFFFF; padding: 0.75rem 1.5re
-m; border-radius: 6px; text-decoration: none; font-weight: 600; box-shadow: 0 2px 4px rgba(245,124,0,0.3);">■ Solicitar Reserva</a>
+{% extends 'base/base.html' %} {% block titulo %}Inicio — Gestión de Pañol CTP
+Antonio Martín Marte{% endblock %}
+ {% block contenido %}
+<!-- Encabezado de Bienvenida -->
+<div class="dashboard-header">
+  <h1 class="dashboard-title">
+    Bienvenido{% if user.is_authenticated %}, {{ user.username }}{% endif %}
+  </h1>
+  <p class="dashboard-subtitle">
+    Panel de control y gestión general del Pañol Institucional.
+  </p>
+</div>
+
+<!-- Tarjetas de Resumen (KPIs) -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon blue">
+      <i class="fa-solid fa-boxes-stacked"></i>
     </div>
-</section>
+    <div class="stat-data">
+      <span class="stat-value">{{ total_recursos|default:"0" }}</span>
+      <span class="stat-label">Recursos Registrados</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon amber">
+      <i class="fa-solid fa-handshake"></i>
+    </div>
+    <div class="stat-data">
+      <span class="stat-value">{{ reservas_activas|default:"0" }}</span>
+      <span class="stat-label">Préstamos Activos</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon green">
+      <i class="fa-solid fa-chalkboard-user"></i>
+    </div>
+    <div class="stat-data">
+      <span class="stat-value">{{ total_docentes|default:"0" }}</span>
+      <span class="stat-label">Docentes Registrados</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon purple">
+      <i class="fa-solid fa-users-rectangle"></i>
+    </div>
+    <div class="stat-data">
+      <span class="stat-value">{{ total_cursos|default:"0" }}</span>
+      <span class="stat-label">Cursos Activos</span>
+    </div>
+  </div>
+</div>
+
+<!-- Bloques de Contenido Principal -->
+<div class="dashboard-main">
+  <!-- Columna Izquierda: Acciones y Módulos -->
+  <div>
+    <div class="card-box">
+      <div class="card-box-header">
+        <h2 class="card-box-title">
+          <i class="fa-solid fa-bolt"></i> Acciones Rápidas
+        </h2>
+      </div>
+      <div class="quick-actions-grid">
+        <a href="{% url 'recurso:recurso_list' %}" class="quick-action-btn">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Ver Inventario</span>
+        </a>
+        <a href="{% url 'reserva:reserva_list' %}" class="quick-action-btn">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Nueva Reserva</span>
+        </a>
+        <a href="{% url 'docente:docente_list' %}" class="quick-action-btn">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Gestión Docentes</span>
+        </a>
+        <a href="{% url 'curso:curso_list' %}" class="quick-action-btn">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Ver Cursos</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna Derecha: Información del Sistema -->
+  <div>
+    <div class="card-box">
+      <div class="card-box-header">
+        <h2 class="card-box-title">
+          <i class="fa-solid fa-circle-info"></i> Información
+        </h2>
+      </div>
+      <ul class="info-list">
+        <li class="info-item">
+          <span>Institución</span>
+          <strong>CTP A. M. Marte</strong>
+        </li>
+        <li class="info-item">
+          <span>Ubicación</span>
+          <strong>Ushuaia, TDF</strong>
+        </li>
+        <li class="info-item">
+          <span>Estado del Pañol</span>
+          <strong class="status-operativo">Operativo</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}
