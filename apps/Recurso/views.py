@@ -10,21 +10,21 @@ class RecursoDetailView(DetailView):
 class RecursoListView(ListView):
     model = Recurso
     template_name = 'recurso/list.html'
-    context_object_name = 'recursos'
+    context_object_name = 'recurso'
 
 class RecursoCreateView(CreateView):
     model = Recurso
     fields = '__all__'
     template_name = 'recurso/create.html'
-    success_url = reverse_lazy('recursos:recurso_list')
+    success_url = reverse_lazy('recurso:recurso_list')
 
 class RecursoUpdateView(UpdateView):
     model = Recurso
     fields = '__all__'
     template_name = 'recurso/update.html'
-    success_url = reverse_lazy('recursos:recurso_list')
+    success_url = reverse_lazy('recurso:recurso_list')
 
 class RecursoDeleteView(DeleteView):
     model = Recurso
     template_name = 'recurso/delete.html'
-    success_url = reverse_lazy('recursos:recurso_list')
+    success_url = reverse_lazy('recurso:recurso_list')

@@ -10,21 +10,21 @@ class CursoDetailView(DetailView):
 class CursoListView(ListView):
     model = Curso
     template_name = 'curso/list.html'
-    context_object_name = 'cursos'
+    context_object_name = 'curso'
 
 class CursoCreateView(CreateView):
     model = Curso
     fields = '__all__'
     template_name = 'curso/create.html'
-    success_url = reverse_lazy('cursos:curso_list')
+    success_url = reverse_lazy('curso:curso_list')
 
 class CursoUpdateView(UpdateView):
     model = Curso
     fields = '__all__'
     template_name = 'curso/update.html'
-    success_url = reverse_lazy('cursos:curso_list')
+    success_url = reverse_lazy('curso:curso_list')
 
 class CursoDeleteView(DeleteView):
     model = Curso
     template_name = 'curso/delete.html'
-    success_url = reverse_lazy('cursos:curso_list')
+    success_url = reverse_lazy('curso:curso_list')

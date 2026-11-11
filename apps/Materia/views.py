@@ -10,7 +10,7 @@ class MateriaDetailView(DetailView):
 class MateriaListView(ListView):
     model = Materia
     template_name = 'materia/list.html'
-    context_object_name = 'materias'
+    context_object_name = 'materia'
 
 class MateriaCreateView(CreateView):
     model = Materia

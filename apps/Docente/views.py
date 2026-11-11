@@ -10,21 +10,21 @@ class DocenteDetailView(DetailView):
 class DocenteListView(ListView):
     model = Docente
     template_name = 'docente/list.html'
-    context_object_name = 'docentes'
+    context_object_name = 'docente'
 
 class DocenteCreateView(CreateView):
     model = Docente
     fields = '__all__'
     template_name = 'docente/create.html'
-    success_url = reverse_lazy('docentes:docente_list')
+    success_url = reverse_lazy('docente:docente_list')
 
 class DocenteUpdateView(UpdateView):
     model = Docente
     fields = '__all__'
     template_name = 'docente/update.html'
-    success_url = reverse_lazy('docentes:docente_list')
+    success_url = reverse_lazy('docente:docente_list')
 
 class DocenteDeleteView(DeleteView):
     model = Docente
     template_name = 'docente/delete.html'
-    success_url = reverse_lazy('docentes:docente_list')
+    success_url = reverse_lazy('docente:docente_list')
