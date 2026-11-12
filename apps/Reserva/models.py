@@ -12,9 +12,8 @@ class Reserva(models.Model):
     
     recursos = models.ManyToManyField(Recurso)
     
-    fecha_reserva = models.DateField(auto_now_add=True)
-    fecha_prestamo = models.DateField(max_length=10)
-    hora_prestamo = models.CharField(max_length=10)
+    fecha_prestamo = models.DateField(auto_now_add=True)
+    hora_prestamo = models.CharField(auto_now_add=True)
     
     motivo = models.CharField(max_length=250) 
     observaciones = models.CharField(max_length=250)
